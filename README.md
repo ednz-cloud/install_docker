@@ -18,6 +18,16 @@ hashi_vault_install: true # by default, set to true
 ```
 This variable defines if the vault package is to be installed or not before configuring. If you install vault using another task, you can set this to `false`.
 
+```yaml
+install_docker_compose: false # by default, set to false
+```
+This variables defines whether or not to install docker-compose on the host.
+
+```yaml
+install_docker_compose_version: latest # by default, set to latest
+```
+This variable defines the version of docker-compose to install. It support either `latest`, or the version number (`vX.Y.Z`). Officially, only versions `>=2.0.1` are supported, as the naming for most packages changed at this release.
+
 Dependencies
 ------------
 

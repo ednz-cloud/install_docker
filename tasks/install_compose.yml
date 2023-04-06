@@ -9,7 +9,7 @@
   register: _docker_compose_new_release
 
 - name: "Check current compose version"
-  command: "{{ install_docker_compose_path }} --version"
+  command: "{{ install_docker_compose_path }} --version --short"
   register: _docker_compose_old_release
   check_mode: false
   changed_when: false
@@ -23,7 +23,7 @@
 
 - name: "Set facts for current compose release"
   ansible.builtin.set_fact:
-    install_docker_compose_current_version: "{{ _docker_compose_old_release.stdout | regex_search('(\\d+(\\.\\d+)+)') }}"
+    install_docker_compose_current_version: "{{ _docker_compose_old_release.stdout | regex_replace('v', '') }}"
   when: _docker_compose_old_release.stdout is defined
     and (_docker_compose_old_release.stdout | length > 0)
 
