@@ -26,7 +26,7 @@ This variables defines whether or not to install docker-compose on the host.
 ```yaml
 install_docker_compose_version: latest # by default, set to latest
 ```
-This variable defines the version of docker-compose to install. It support either `latest`, or the version number (`vX.Y.Z`). Officially, only versions `>=2.0.1` are supported, as the naming for most packages changed at this release.
+This variable defines the version of docker-compose to install. It support either `latest`, or the version number (`vX.Y.Z`). Officially, only versions `>=v2.0.1` are supported, as the naming for most packages changed at this release.
 
 Dependencies
 ------------
