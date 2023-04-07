@@ -1,3 +1,1 @@
-roles:
-  - name: ednxzu.manage_repositories
-  - name: ednxzu.manage_apt_packages
+roles: []
