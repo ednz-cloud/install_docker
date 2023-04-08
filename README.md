@@ -11,12 +11,17 @@ None.
 
 Role Variables
 --------------
-Available variables are listed below, along with default values. A sample file for the default values is available in `default/hashicorp_vault.yml.sample` in case you need it for any `group_vars` or `host_vars` configuration.
+Available variables are listed below, along with default values. A sample file for the default values is available in `default/install_docker.yml.sample` in case you need it for any `group_vars` or `host_vars` configuration.
 
 ```yaml
-hashi_vault_install: true # by default, set to true
+install_docker_edition: ce # by default, set to ce
 ```
-This variable defines if the vault package is to be installed or not before configuring. If you install vault using another task, you can set this to `false`.
+This variable sets the edition of docker to install. It can be either `ce` (community edition) or `ee` (enterprise edition).
+
+```yaml
+install_docker_start_service: true
+```
+This variable defines whether or not to start the docker service after installing it. This can be turned off in case you're building golden images, so that your golden image does not start the docker service during it's build process.
 
 ```yaml
 install_docker_compose: false # by default, set to false
@@ -28,10 +33,25 @@ install_docker_compose_version: latest # by default, set to latest
 ```
 This variable defines the version of docker-compose to install. It support either `latest`, or the version number (`vX.Y.Z`). Officially, only versions `>=v2.0.1` are supported, as the naming for most packages changed at this release.
 
+```yaml
+install_docker_python_packages: false # by default, set to false
+```
+This variable defines whether or not to install the python packages for managing docker with ansible. This package is required if you plan to perform docker operations with ansible, and should be installed if that is your goal.
+
+```yaml
+install_docker_python_packages_version: latest # by default, set to latest
+```
+This variable defines the version of the python docker package that should be installed. Refer to [ednxzu/manage_pip_packages](https://github.com/ednxzu/manage_pip_packages) for documentation.
+
+```yaml
+install_docker_users: [] #by default, set to []
+```
+This variable is a list of users to add to the docker group, so that they can perform docker related tasks, without requiring privilege escalation.
+
 Dependencies
 ------------
 
-This role requires both `ednxzu.manage_repositories` and `ednxzu.manage_apt_packages` to install docker.
+This role has a task that installs its own dependencies located in `task/prerequisites.yml`, so that you don't need to manage them. This role requires both `ednxzu.manage_repositories`, `ednxzu.manage_apt_packages` and `ednxzu.manage_apt_packages` to install docker and potentially python packages.
 
 Example Playbook
 ----------------
