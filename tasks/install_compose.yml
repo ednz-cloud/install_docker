@@ -9,7 +9,7 @@
   register: _docker_compose_new_release
 
 - name: "Check current compose version"
-  command: "{{ install_docker_compose_path }} --version --short"
+  ansible.builtin.command: "{{ install_docker_compose_path }} --version --short"
   register: _docker_compose_old_release
   check_mode: false
   changed_when: false

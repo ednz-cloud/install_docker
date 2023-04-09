@@ -1,2 +1,14 @@
 ---
 # handlers file for install_docker
+- name: "Enable docker service"
+  ansible.builtin.service:
+    name: docker
+    enabled: true
+  listen: "systemctl-enable-docker"
+
+- name: "Start docker service"
+  ansible.builtin.service:
+    name: docker
+    state: restarted
+  listen: "systemctl-restart-docker"
+  when: install_docker_start_service

@@ -29,3 +29,13 @@ def test_docker_interaction(host):
     """Validate interaction with docker."""
     docker_ps = host.check_output("docker ps")
     assert docker_ps == "CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES"
+
+def test_docker_compose(host):
+    """Validate docker-compose installation"""
+    docker_compose_bin = host.file("/usr/local/bin/docker-compose")
+    docker_compose_version = host.check_output("docker-compose --version")
+    assert docker_compose_bin.exists
+    assert docker_compose_bin.user == "root"
+    assert docker_compose_bin.group == "root"
+    assert docker_compose_bin.mode == 0o755
+    assert docker_compose_version == "Docker Compose version "+ r'^v\d+\.\d+\.\d+$'

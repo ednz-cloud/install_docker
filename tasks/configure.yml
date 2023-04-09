@@ -7,13 +7,13 @@
     append: true
   loop: "{{ install_docker_users }}"
 
-- name: "Enable docker service"
-  ansible.builtin.service:
-    name: docker
-    enabled: true
-
-- name: "Start docker service"
-  ansible.builtin.service:
-    name: docker
-    state: restarted
-  when: install_docker_start_service
+- name: "Copy daemon.json template"
+  ansible.builtin.template:
+    src: daemon.json.j2
+    dest: "{{ install_docker_daemon_dir }}/daemon.json"
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - "systemctl-enable-docker"
+    - "systemctl-restart-docker"
