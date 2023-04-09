@@ -1,5 +1,5 @@
 """Role testing files using testinfra."""
-
+import re
 
 def test_hosts_file(host):
     """Validate /etc/hosts file."""
@@ -32,10 +32,22 @@ def test_docker_interaction(host):
 
 def test_docker_compose(host):
     """Validate docker-compose installation"""
+    docker_compose_pattern = r'^Docker Compose version v\d+\.\d+\.\d+$'
     docker_compose_bin = host.file("/usr/local/bin/docker-compose")
     docker_compose_version = host.check_output("docker-compose --version")
     assert docker_compose_bin.exists
     assert docker_compose_bin.user == "root"
     assert docker_compose_bin.group == "root"
     assert docker_compose_bin.mode == 0o755
-    assert docker_compose_version == "Docker Compose version "+ r'^v\d+\.\d+\.\d+$'
+    assert re.match(docker_compose_pattern,docker_compose_version) is not None
+
+def test_docker_python_package(host):
+    """Validate docker python package installation"""
+    docker_compose_pattern = r'^Docker Compose version v\d+\.\d+\.\d+$'
+    docker_compose_bin = host.file("/usr/local/bin/docker-compose")
+    docker_compose_version = host.check_output("docker-compose --version")
+    assert docker_compose_bin.exists
+    assert docker_compose_bin.user == "root"
+    assert docker_compose_bin.group == "root"
+    assert docker_compose_bin.mode == 0o755
+    assert re.match(docker_compose_pattern,docker_compose_version) is not None
