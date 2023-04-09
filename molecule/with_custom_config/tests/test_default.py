@@ -43,11 +43,7 @@ def test_docker_compose(host):
 
 def test_docker_python_package(host):
     """Validate docker python package installation"""
-    docker_compose_pattern = r'^Docker Compose version v\d+\.\d+\.\d+$'
-    docker_compose_bin = host.file("/usr/local/bin/docker-compose")
-    docker_compose_version = host.check_output("docker-compose --version")
-    assert docker_compose_bin.exists
-    assert docker_compose_bin.user == "root"
-    assert docker_compose_bin.group == "root"
-    assert docker_compose_bin.mode == 0o755
-    assert re.match(docker_compose_pattern,docker_compose_version) is not None
+    pip_packages_list = host.pip.get_packages(pip_path='pip')
+    pip_outdated_list = host.pip.get_outdated_packages(pip_path='pip')
+    assert 'docker' in pip_packages_list
+    assert 'docker' not in  pip_outdated_list

@@ -29,3 +29,15 @@ def test_docker_interaction(host):
     """Validate interaction with docker."""
     docker_ps = host.check_output("docker ps")
     assert docker_ps == "CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES"
+
+def test_docker_compose(host):
+    """Validate docker-compose installation"""
+    docker_compose_bin = host.file("/usr/local/bin/docker-compose")
+    assert not docker_compose_bin.exists
+
+def test_docker_python_package(host):
+    """Validate docker python package installation"""
+    pip_packages_list = host.pip.get_packages(pip_path='pip')
+    pip_outdated_list = host.pip.get_outdated_packages(pip_path='pip')
+    assert 'docker' not in pip_packages_list
+    assert 'docker' not in  pip_outdated_list
