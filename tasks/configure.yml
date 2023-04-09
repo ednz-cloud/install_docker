@@ -1,21 +1,19 @@
 ---
 # task/configure file for install_docker
-- name: "Create group {{ install_docker_group }}"
-  ansible.builtin.group:
-    name: "{{ install_docker_group }}"
-    state: present
-
-- name: "Create directory {{ install_docker_daemon_dir }}"
-  ansible.builtin.file:
-    path: "{{ install_docker_daemon_dir }}"
-    state: directory
-    owner: root
-    group: root
-    mode: '0755'
-
 - name: "Add specified users to group {{ install_docker_group }}"
   ansible.builtin.user:
     name: "{{ item }}"
     groups: "{{ install_docker_group }}"
     append: true
   loop: "{{ install_docker_users }}"
+
+- name: "Enable docker service"
+  ansible.builtin.service:
+    name: docker
+    enabled: true
+
+- name: "Start docker service"
+  ansible.builtin.service:
+    name: docker
+    state: restarted
+  when: install_docker_start_service
