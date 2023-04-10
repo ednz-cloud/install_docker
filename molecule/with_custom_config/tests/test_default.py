@@ -23,7 +23,7 @@ def test_docker_daemon(host):
     assert docker_daemon_file.user == "root"
     assert docker_daemon_file.group =="root"
     assert docker_daemon_file.mode == 0o644
-    assert docker_daemon_file.contains("{}")
+    assert docker_daemon_file.contains("\"data-root\": \"/opt/docker\"")
 
 def test_docker_interaction(host):
     """Validate interaction with docker."""

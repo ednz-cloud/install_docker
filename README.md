@@ -48,6 +48,11 @@ install_docker_users: [] #by default, set to []
 ```
 This variable is a list of users to add to the docker group, so that they can perform docker related tasks, without requiring privilege escalation.
 
+```yaml
+install_docker_daemon_options: {} # by default, set to {}
+```
+This variable defines the parameters to append to the daemon.json file (in `/etc/docker/daemon.json`). For more details, check out the [documentation](https://docs.docker.com/config/daemon/).
+
 Dependencies
 ------------
 

@@ -6,4 +6,5 @@ install_docker_compose_version: latest
 install_docker_python_packages: true
 install_docker_python_packages_version: latest
 install_docker_users: []
-install_docker_daemon_options: {}
+install_docker_daemon_options:
+  data-root: "/opt/docker"
