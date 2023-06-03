@@ -1,5 +1,6 @@
 ---
 # install_docker_edition: ce # can be ce or ee (community or enterprise)
+# install_docker_auto_update: false
 # install_docker_start_service: true
 # install_docker_compose: false
 # install_docker_compose_version: latest

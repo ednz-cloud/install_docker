@@ -19,6 +19,11 @@ install_docker_edition: ce # by default, set to ce
 This variable sets the edition of docker to install. It can be either `ce` (community edition) or `ee` (enterprise edition).
 
 ```yaml
+install_docker_auto_update: false # by default, set to false
+```
+This variable allows you to choose to automatically update docker if a newer version is available whenever the role is replayed. Updating docker is usually pretty safe if done on a regular basis.
+
+```yaml
 install_docker_start_service: true
 ```
 This variable defines whether or not to start the docker service after installing it. This can be turned off in case you're building golden images, so that your golden image does not start the docker service during it's build process.
