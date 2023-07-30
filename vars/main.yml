@@ -1,9 +1,5 @@
 ---
 # vars file for install_docker
-install_docker_prerequisites_roles:
-  - ednxzu.manage_repositories
-  - ednxzu.manage_apt_packages
-  - ednxzu.manage_pip_packages
 install_docker_compose_path: "/usr/local/bin/docker-compose"
 install_docker_compose_github_api: https://api.github.com/repos/docker/compose
 install_docker_compose_github_url: https://github.com/docker/compose

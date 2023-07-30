@@ -61,7 +61,9 @@ This variable defines the parameters to append to the daemon.json file (in `/etc
 Dependencies
 ------------
 
-This role has a task that installs its own dependencies located in `task/prerequisites.yml`, so that you don't need to manage them. This role requires `ednxzu.manage_repositories`, `ednxzu.manage_apt_packages` and `ednxzu.manage_apt_packages` to install docker and potentially python packages.
+`ednxzu.manage_pip_packages` to install docker python packages for using the `community.docker` modules.
+`ednxzu.manage_repositories` to configure the docker apt repository.
+`ednxzu.manage_apt_packages` to install docker.
 
 Example Playbook
 ----------------
