@@ -18,9 +18,9 @@ install_docker_packages:
   - name: "containerd.io"
     version: latest
     state: "{% if install_docker_auto_update %}latest{% else %}present{% endif %}"
-install_docker_pip_packages:
-  - name: docker
-    version_constraint: latest
+install_docker_python_packages:
+  - name: python3-docker
+    version: latest
     state: "{% if install_docker_auto_update %}latest{% else %}present{% endif %}"
 install_docker_repository:
   - uri: "https://download.docker.com/linux/{{ ansible_distribution|lower }}"

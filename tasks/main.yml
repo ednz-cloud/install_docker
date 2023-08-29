@@ -10,8 +10,8 @@
   ansible.builtin.include_tasks: install_compose.yml
   when: install_docker_compose
 
-- name: "Import install_docker_pip.yml"
-  ansible.builtin.include_tasks: install_docker_pip.yml
+- name: "Import install_python_docker.yml"
+  ansible.builtin.include_tasks: install_python_docker.yml
   when: install_docker_python_packages
 
 - name: "Import configure.yml"
