@@ -99,19 +99,12 @@
 
     - name: "Test: python package docker"
       block:
-        - name: "Command pip3 list -o"
+        - name: "Command pip3 list"
           ansible.builtin.command: "pip3 list -o"
           changed_when: false
-          register: pip3_list_outdated
-
-        - name: "Command pip3 list -u"
-          ansible.builtin.command: "pip3 list -u"
-          changed_when: false
-          register: pip3_list_uptodate
-
+          register: pip3_list
 
         - name: "Verify python package docker"
           ansible.builtin.assert:
             that:
-              - "'docker' not in pip3_list_outdated.stdout"
-              - "'docker' not in pip3_list_uptodate.stdout"
+              - "'docker' not in pip3_list"

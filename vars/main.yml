@@ -18,7 +18,7 @@ install_docker_packages:
   - name: "containerd.io"
     version: latest
     state: "{% if install_docker_auto_update %}latest{% else %}present{% endif %}"
-install_docker_python_packages:
+install_docker_python_packages_list:
   - name: python3-docker
     version: latest
     state: "{% if install_docker_auto_update %}latest{% else %}present{% endif %}"
