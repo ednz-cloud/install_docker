@@ -16,4 +16,4 @@
     mode: '0644'
   notify:
     - "systemctl-enable-docker"
-    - "systemctl-restart-docker"
+    - "systemctl-reload-docker"

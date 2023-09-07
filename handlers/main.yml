@@ -6,9 +6,8 @@
     enabled: true
   listen: "systemctl-enable-docker"
 
-- name: "Start docker service"
+- name: "Reload docker service"
   ansible.builtin.service:
     name: docker
-    state: restarted
-  listen: "systemctl-restart-docker"
-  when: install_docker_start_service
+    state: reloaded
+  listen: "systemctl-reload-docker"
