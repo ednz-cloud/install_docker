@@ -11,3 +11,4 @@
     name: docker
     state: reloaded
   listen: "systemctl-reload-docker"
+  when: install_docker_start_service
