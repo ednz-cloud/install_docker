@@ -78,6 +78,7 @@
         - name: "Command docker ps"
           ansible.builtin.command: "docker ps"
           changed_when: false
+          become: true
           register: docker_ps
 
         - name: "Verify docker interaction"
