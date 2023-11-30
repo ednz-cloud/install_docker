@@ -21,4 +21,5 @@
   ansible.builtin.service:
     name: docker
     state: started
+  become: true
   when: install_docker_start_service
