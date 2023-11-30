@@ -6,6 +6,7 @@
     groups: "{{ install_docker_group }}"
     append: true
   loop: "{{ install_docker_users }}"
+  become: true
 
 - name: "Copy daemon.json template"
   ansible.builtin.template:
@@ -14,6 +15,7 @@
     owner: root
     group: root
     mode: '0644'
+  become: true
   notify:
     - "systemctl-enable-docker"
     - "systemctl-reload-docker"

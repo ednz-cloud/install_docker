@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include ednxzu.install_docker"
+      ansible.builtin.include_role:
+        name: "ednxzu.install_docker"

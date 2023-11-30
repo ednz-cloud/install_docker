@@ -4,6 +4,7 @@
   ansible.builtin.group:
     name: "{{ install_docker_group }}"
     state: present
+  become: true
 
 - name: "Create directory {{ install_docker_daemon_dir }}"
   ansible.builtin.file:
@@ -12,3 +13,4 @@
     owner: root
     group: root
     mode: '0755'
+  become: true
