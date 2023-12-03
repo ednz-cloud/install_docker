@@ -2,6 +2,7 @@
 - name: Verify
   hosts: all
   gather_facts: true
+  become: true
   tasks:
     - name: "Test: file /etc/hosts"
       block:
@@ -82,7 +83,6 @@
         - name: "Command docker ps"
           ansible.builtin.command: "docker ps"
           changed_when: false
-          become: true
           register: docker_ps
 
         - name: "Verify docker interaction"
