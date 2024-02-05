@@ -46,7 +46,7 @@ This variable defines whether or not to install the python packages for managing
 ```yaml
 install_docker_python_packages_version: latest # by default, set to latest
 ```
-This variable defines the version of the python docker package that should be installed. Refer to [ednxzu/manage_pip_packages](https://github.com/ednxzu/manage_pip_packages) for documentation.
+This variable defines the version of the python docker package that should be installed. Refer to [ednz_cloud/manage_pip_packages](https://github.com/ednz_cloud/manage_pip_packages) for documentation.
 
 ```yaml
 install_docker_users: [] #by default, set to []
@@ -61,9 +61,9 @@ This variable defines the parameters to append to the daemon.json file (in `/etc
 Dependencies
 ------------
 
-`ednxzu.manage_pip_packages` to install docker python packages for using the `community.docker` modules.
-`ednxzu.manage_repositories` to configure the docker apt repository.
-`ednxzu.manage_apt_packages` to install docker.
+`ednz_cloud.manage_pip_packages` to install docker python packages for using the `community.docker` modules.
+`ednz_cloud.manage_repositories` to configure the docker apt repository.
+`ednz_cloud.manage_apt_packages` to install docker.
 
 Example Playbook
 ----------------
@@ -73,7 +73,7 @@ Including an example of how to use your role (for instance, with variables passe
 # calling the role inside a playbook with either the default or group_vars/host_vars
 - hosts: servers
   roles:
-    - ednxzu.install_docker
+    - ednz_cloud.install_docker
 ```
 
 License

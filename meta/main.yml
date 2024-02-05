@@ -1,12 +1,12 @@
 ---
 # meta file for install_docker
 galaxy_info:
-  namespace: 'ednxzu'
-  role_name: 'install_docker'
-  author: 'Bertrand Lanson'
-  description: 'Install and configure docker for debian-based distros.'
-  license: 'license (BSD, MIT)'
-  min_ansible_version: '2.10'
+  namespace: "ednz_cloud"
+  role_name: "install_docker"
+  author: "Bertrand Lanson"
+  description: "Install and configure docker for debian-based distros."
+  license: "license (BSD, MIT)"
+  min_ansible_version: "2.10"
   platforms:
     - name: Ubuntu
       versions:
@@ -17,11 +17,11 @@ galaxy_info:
         - bullseye
         - bookworm
   galaxy_tags:
-    - 'ubuntu'
-    - 'debian'
-    - 'docker'
-    - 'container'
-    - 'compose'
-    - 'containerd'
+    - "ubuntu"
+    - "debian"
+    - "docker"
+    - "container"
+    - "compose"
+    - "containerd"
 
 dependencies: []
