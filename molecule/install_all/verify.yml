@@ -139,7 +139,11 @@
         - name: "Verify file /usr/local/bin/docker-compose"
           ansible.builtin.assert:
             that:
-              - not _stat_usr_local_bin_docker_compose.stat.exists
+              - _stat_usr_local_bin_docker_compose.stat.exists
+              - _stat_usr_local_bin_docker_compose.stat.isreg
+              - _stat_usr_local_bin_docker_compose.stat.pw_name == 'root'
+              - _stat_usr_local_bin_docker_compose.stat.gr_name == 'root'
+              - _stat_usr_local_bin_docker_compose.stat.mode == '0755'
 
     - name: "Test | Package python3-docker"
       block:
@@ -150,4 +154,4 @@
         - name: "Verify | Package python3-docker"
           ansible.builtin.assert:
             that:
-              - ansible_facts.packages['python3-docker'] is not defined
+              - ansible_facts.packages['python3-docker'] is defined

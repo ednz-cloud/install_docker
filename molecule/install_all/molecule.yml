@@ -33,7 +33,7 @@ provisioner:
 verifier:
   name: ansible
 scenario:
-  name: default
+  name: install_all
   test_sequence:
     - dependency
     - cleanup
