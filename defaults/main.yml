@@ -1,11 +1,12 @@
 ---
-# defaults file for install_docker
-install_docker_edition: ce # can be ce or ee (community or enterprise)
-install_docker_auto_update: false
+# defaults file for docker
+install_docker_version: latest
 install_docker_start_service: true
-install_docker_compose: false
-install_docker_compose_version: latest
-install_docker_python_packages: false
-install_docker_python_packages_version: latest
+install_docker_data_dir: /var/lib/docker
 install_docker_users: []
 install_docker_daemon_options: {}
+install_docker_python_packages: false
+install_docker_compose: false
+install_docker_compose_version: latest
+install_docker_install_completion: true
+install_docker_completion_shell:
