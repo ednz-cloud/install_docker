@@ -1,36 +1,36 @@
 ---
 # vars file for install_docker
+install_docker_binary_path: /usr/local/bin
 install_docker_compose_path: "/usr/local/bin/docker-compose"
-install_docker_compose_github_api: https://api.github.com/repos/docker/compose
-install_docker_compose_github_url: https://github.com/docker/compose
+install_docker_user: root
 install_docker_group: docker
 install_docker_daemon_dir: /etc/docker
-install_docker_packages:
-  - name: "docker-{{ install_docker_edition }}"
-    version: latest
-    state: "{% if install_docker_auto_update %}latest{% else %}present{% endif %}"
-  - name: "docker-{{ install_docker_edition }}-cli"
-    version: latest
-    state: "{% if install_docker_auto_update %}latest{% else %}present{% endif %}"
-  - name: "docker-{{ install_docker_edition }}-rootless-extras"
-    version: latest
-    state: "{% if install_docker_auto_update %}latest{% else %}present{% endif %}"
-  - name: "containerd.io"
-    version: latest
-    state: "{% if install_docker_auto_update %}latest{% else %}present{% endif %}"
+
+install_docker_service_list:
+  - containerd
+  - docker
+
+install_docker_socket_list:
+  - docker
+
+install_docker_architecture_map:
+  armv7l: "armhf"
+  armv6l: "armhf"
+
 install_docker_python_packages_list:
   - name: python3-docker
     version: latest
-    state: "{% if install_docker_auto_update %}latest{% else %}present{% endif %}"
-install_docker_repository:
-  - name: docker
-    uri: "https://download.docker.com/linux/{{ ansible_distribution|lower }}"
-    comments: "{{ ansible_distribution|lower }} docker repository"
-    types:
-      - deb
-    suites:
-      - "{{ ansible_distribution_release }}"
-    components:
-      - stable
-    options:
-      Signed-By: "https://download.docker.com/linux/{{ ansible_distribution|lower }}/gpg"
+    state: present
+
+install_docker_sysctl_entries:
+  net.bridge.bridge-nf-call-iptables: 1
+  net.bridge.bridge-nf-call-ip6tables: 1
+
+install_docker_modprobe_modules:
+  - br_netfilter
+
+install_docker_github_api: https://api.github.com/repos
+install_docker_github_url: https://github.com
+install_docker_github_project: moby/moby
+install_docker_repository_url: "https://download.docker.com/linux/static/stable/{{ install_docker_architecture_map[ansible_architecture]|default(ansible_architecture) }}"
+install_docker_compose_github_project: docker/compose
