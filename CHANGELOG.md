@@ -1,3 +1,9 @@
+## v0.1.1 (2025-01-25)
+
+### Fix
+
+- wrong variable names would make docker not restart on upgrades
+
 ## v0.1.0 (2024-12-29)
 
 ### Feat
