@@ -96,9 +96,9 @@
 
     - name: "Docker | Set restart-check variable"
       ansible.builtin.set_fact:
-        _install_docker_service_install_docker_need_restart: true
+        _install_docker_service_docker_need_restart: true
         _install_docker_service_containerd_need_restart: true
-        _install_docker_socket_install_docker_need_restart: true
+        _install_docker_socket_docker_need_restart: true
 
     - name: "Docker | Cleanup temporary directory"
       ansible.builtin.file:
@@ -131,9 +131,9 @@
 - name: "Docker | Set reload-check & restart-check variable"
   ansible.builtin.set_fact:
     _install_docker_service_need_daemon_reload: true
-    _install_docker_service_install_docker_need_restart: "{{ _install_docker_unit_files.results | item_changed_in_list('docker') }}"
+    _install_docker_service_docker_need_restart: "{{ _install_docker_unit_files.results | item_changed_in_list('docker') }}"
     _install_docker_service_containerd_need_restart: "{{ _install_docker_unit_files.results | item_changed_in_list('containerd') }}"
-    _install_docker_socket_install_docker_need_restart: "{{ _install_docker_socket_files.results | item_changed_in_list('docker') }}"
+    _install_docker_socket_docker_need_restart: "{{ _install_docker_socket_files.results | item_changed_in_list('docker') }}"
   when: >- # noqa: no-handler
     _install_docker_unit_files.changed or
     _install_docker_socket_files.changed
