@@ -16,6 +16,7 @@ jobs:
     outputs:
       registry-username: ${{ steps.import-secrets.outputs.GITEA_ACTIONS_USERNAME }}
       registry-token: ${{ steps.import-secrets.outputs.GITEA_ACTIONS_TOKEN }}
+      vault-token: ${{ steps.generate-vault-token.outputs.VAULT_TOKEN }}
     steps:
       - name: Get secrets from vault
         id: import-secrets
@@ -28,6 +29,13 @@ jobs:
           secrets: |
             kv/data/applications/gitea/users/actions username | GITEA_ACTIONS_USERNAME ;
             kv/data/applications/gitea/users/actions token_write | GITEA_ACTIONS_TOKEN ;
+
+      - name: Generate Vault token
+        id: generate-vault-token
+        run: |
+          VAULT_TOKEN=$(curl --silent --request POST --data '{"role_id": "${{ secrets.VAULT_APPROLE_ID }}","secret_id": "${{ secrets.VAULT_APPROLE_SECRET_ID }}"}' https://vault.ednz.fr/v1/auth/approle/login | jq -r .auth.client_token)
+
+          echo "vault_token=$VAULT_TOKEN" >> $GITHUB_OUTPUT
 
   end_to_end_test:
     name: End to End Test
@@ -43,11 +51,13 @@ jobs:
             "Ubuntu 24.04 LTS Noble Numbat",
           ]
         scenario: ["default", "install_all"]
-    uses: https://git.ednz.fr/github-actions/library/.gitea/workflows/molecule-e2e-test.yml@v0.1.0
+    uses: https://git.ednz.fr/github-actions/library/.gitea/workflows/molecule-e2e-test.yml@feat/openstack-goodies
     with:
       role: manage_repositories
       scenario: ${{ matrix.scenario }}
       test_os: ${{ matrix.test_os }}
+      VAULT_ADDR: https://vault.ednz.fr
     secrets:
       GITEA_ACTIONS_USERNAME: ${{ needs.retrieve-credentials.outputs.registry-username }}
       GITEA_ACTIONS_TOKEN: ${{ needs.retrieve-credentials.outputs.registry-token }}
+      VAULT_TOKEN: ${{ needs.retrieve-credentials.outputs.vault-token }}
