@@ -10,7 +10,7 @@ platforms:
     description: Molecule test instance.
     flavor: a2-ram4-disk20-perf1
     image: ${MOLECULE_TEST_OS:-"Debian 12 bookworm"}
-    user: debian
+    user: ${MOLECULE_TEST_USER:-"debian"}
     auto_ip: false
     network:
       name: pcp-w3rxsrj-backend-network

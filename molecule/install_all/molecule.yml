@@ -9,8 +9,8 @@ platforms:
   - name: instance
     description: Molecule test instance.
     flavor: a2-ram4-disk20-perf1
-    image: Debian 12 bookworm
-    user: debian
+    image: ${MOLECULE_TEST_OS:-"Debian 12 bookworm"}
+    user: ${MOLECULE_TEST_USER:-"debian"}
     network:
       name: pcp-w3rxsrj-backend-network
       create: false
