@@ -39,6 +39,7 @@ jobs:
 
   end_to_end_test:
     name: End to End Test
+    runs-on: ubuntu-latest
     needs: retrieve-credentials
     strategy:
       matrix:
@@ -51,15 +52,21 @@ jobs:
             "Ubuntu 24.04 LTS Noble Numbat",
           ]
         scenario: ["default", "install_all"]
-    uses: https://git.ednz.fr/github-actions/library/.gitea/workflows/molecule-e2e-test.yml@feat/openstack-goodies
-    with:
-      role: manage_repositories
-      scenario: ${{ matrix.scenario }}
-      test_os: ${{ matrix.test_os }}
-      is_openstack: true
-      os_cloud: pcp-w3rxsrj-dc4-a
-      VAULT_ADDR: https://vault.ednz.fr
-    secrets:
-      GITEA_ACTIONS_USERNAME: ${{ needs.retrieve-credentials.outputs.registry-username }}
-      GITEA_ACTIONS_TOKEN: ${{ needs.retrieve-credentials.outputs.registry-token }}
-      VAULT_TOKEN: ${{ needs.retrieve-credentials.outputs.vault-token }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate OpenStack cloud file
+        uses: https://git.ednz.fr/github-actions/library/.gitea/actions/generate-cloud-config@feat/openstack-goodies
+        with:
+          vault_addr: https://vault.ednz.fr
+          vault_token: ${{ needs.retrieve-credentials.outputs.vault-token }}
+
+      - name: Run end-to-end tests
+        uses: https://git.ednz.fr/github-actions/library/.gitea/actions/molecule-e2e-test@feat/openstack-goodies
+        with:
+          role: install_docker
+          scenario: ${{ matrix.scenario }}
+          test_os: ${{ matrix.test_os }}
+          is_openstack: "true"
+          os_cloud: pcp-w3rxsrj-dc4-a
