@@ -9,13 +9,14 @@ platforms:
   - name: instance
     description: Molecule test instance.
     flavor: a2-ram4-disk20-perf1
-    image: Debian 12 bookworm
+    image: ${MOLECULE_TEST_OS:-"Debian 12 bookworm"}
     user: debian
+    auto_ip: false
     network:
       name: pcp-w3rxsrj-backend-network
       create: false
     security_group:
-      name: molecule__swarm_ansible__install_docker_default
+      name: molecule__install_docker__default
       create: true
       description: Molecule test security group.
       rules:
