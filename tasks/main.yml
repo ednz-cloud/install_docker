@@ -42,12 +42,14 @@
     daemon_reload: true
   when: _install_docker_service_need_daemon_reload
 
-- name: "Docker | Reload services: {{ install_docker_service_list }}"
+- name: "Docker | Reload services: docker"
   ansible.builtin.service:
-    name: "{{ item }}"
+    name: docker
     state: reloaded
-  loop: "{{ install_docker_service_list }}"
-  when: _install_docker_service_need_reload
+  when:
+    - install_docker_start_service
+    - _install_docker_service_need_reload
+    - not _install_docker_service_docker_need_restart
 
 - name: "Docker | Start services: {{ install_docker_service_list }}"
   ansible.builtin.service:
