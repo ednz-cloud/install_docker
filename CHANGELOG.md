@@ -1,3 +1,12 @@
+## v0.2.0 (2025-06-15)
+
+### Feat
+
+- document variables for docsible
+- **main**: allow docker daemon reload in specific cases
+- **configure**: install completion for bash shell
+- realod docker service on deamon config changes
+
 ## v0.1.1 (2025-01-25)
 
 ### Fix
