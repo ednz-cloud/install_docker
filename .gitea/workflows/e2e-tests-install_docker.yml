@@ -56,6 +56,8 @@ jobs:
       role: manage_repositories
       scenario: ${{ matrix.scenario }}
       test_os: ${{ matrix.test_os }}
+      is_openstack: true
+      os_cloud: pcp-w3rxsrj-dc4-a
       VAULT_ADDR: https://vault.ednz.fr
     secrets:
       GITEA_ACTIONS_USERNAME: ${{ needs.retrieve-credentials.outputs.registry-username }}
